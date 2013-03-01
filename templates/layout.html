@@ -4,10 +4,45 @@
     <meta charset="utf-8" />
     <title>odor receptor predictions</title>
     <link href={{url_for("static", filename="css/bootstrap.css")}} rel="stylesheet" type="text/css" />
+	<script src={{url_for("static", filename="js/jquery-1.9.0.js")}}></script>
+	<script src={{url_for("static", filename="js/bootstrap.js")}}></script>
 </head>
 <body>
-	<script src={{url_for("static", filename="js/bootstrap.js")}}></script>
-	{% block content %}
-	{% endblock %}
-</body>
+    <form>
+	    <fieldset>
+	        <legend>Select a receptor and a method</legend>
+	        <label>Receptor</label>
+	        <select name="receptor" class="receptor">
+	            {% for receptor in receptors %}
+	                <option>{{ receptor }}</option>
+	            {% endfor %}
+	        </select>
+	        <select name="method" class="method">
+	            {% for method in methods %}
+	                <option>{{ method }}</option>
+	            {% endfor %}
+	        </select>
+	  	</fieldset>
+		</form>
+
+		<div class="comment">
+		  machine readable version of the data at URLs of form: <br>
+
+		  /receptor_name/method
+
+		  with Content-Type: 'application/json'
+		</div>
+		<div class="content"></div>
+		<script>
+		    $("select").change(function() {
+		    	url = $("select.receptor").val() + '/' + $("select.method").val()
+		    	console.log(url)
+		    	$("select.receptor").val() + '/' + $("select.method").val()
+				$.get(url, function(data) {
+					console.log(data.slice(1,200))
+  					$('div.content').html(data);
+				});
+		    });
+		</script>
+	</body>
 </html>
