@@ -12,8 +12,7 @@ methods = data.keys()
 receptors = data.values()[0].keys()
 
 @app.route('/')
-def hello_world():
-    # TODO: give overview of available receptors and methods
+def index():
     return render_template('layout.html', receptors=receptors, methods=methods)
 
 @app.route('/<receptor>/<method>')
