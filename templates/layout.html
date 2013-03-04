@@ -1,62 +1,79 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8" />
-    <title>odor receptor predictions</title>
-    <link href={{url_for("static", filename="css/bootstrap.css")}} rel="stylesheet" type="text/css" />
-    <link href={{url_for("static", filename="css/odorapp.css")}} rel="stylesheet" type="text/css" />
-    <script src={{url_for("static", filename="js/jquery-1.9.0.js")}}></script>
-    <script src={{url_for("static", filename="js/bootstrap.js")}}></script>
-</head>
-<body>
-    <form>
-        <fieldset>
-            <legend>Predictions for receptor and method</legend>
-            <label>Receptor</label>
-            <select name="receptor" class="receptor">
-                {% for receptor in receptors %}
-                    <option>{{ receptor }}</option>
-                {% endfor %}
-            </select>
-            <label>Method</label>
-            <select name="method" class="method">
-                {% for method in methods %}
-                    <option>{{ method }}</option>
-                {% endfor %}
-            </select>
-        </fieldset>
-        </form>
 
+    <head>
+        <meta charset="utf-8" />
+        <title>
+            odor receptor predictions
+        </title>
+        <link href={{url_for( "static", filename="css/bootstrap.css" )}} rel="stylesheet"
+        type="text/css" />
+        <link href={{url_for( "static", filename="css/odorapp.css" )}} rel="stylesheet"
+        type="text/css" />
+        <script src={{url_for( "static", filename="js/jquery-1.9.0.js" )}}>
+        </script>
+        <script src={{url_for( "static", filename="js/bootstrap.js" )}}>
+        </script>
+    </head>
+
+    <body>
+        <form>
+            <fieldset>
+                <legend>
+                    Predictions for receptor and method
+                </legend>
+                <label>
+                    Receptor
+                </label>
+                <select name="receptor" class="receptor">
+                    {% for receptor in receptors %}
+                    <option>
+                        {{ receptor }}
+                    </option>
+                    {% endfor %}
+                </select>
+                <label>
+                    Method
+                </label>
+                <select name="method" class="method">
+                    {% for method in methods %}
+                    <option>
+                        {{ method }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </fieldset>
+        </form>
         <a href="#helpmodal" role="button" class="btn" data-toggle="modal">Help</a>
         <div id='helpmodal' class="modal hide fade">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h3>Modal header</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h3>
+                    Modal header
+                </h3>
             </div>
             <div class="modal-body">
                 <p>
-                  machine readable version of the data at URLs of form: <br>
-                  <div class="bash">/receptor_name/method</div><br>
-                  with Content-Type: 'application/json'
+                    machine readable version of the data at URLs of form:
+                    <br>
+                    <div class="code">
+                        /receptor_name/method
+                    </div>
+                    <br>
+                    with Content-Type: 'application/json'
                 </p>
             </div>
             <div class="modal-footer">
-                <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                <button class="btn" data-dismiss="modal" aria-hidden="true">
+                    Close
+                </button>
             </div>
         </div>
-        <div class="comment">
+        <div id="container">
         </div>
-        <div class="content"></div>
-        <script>
-            $("select").change(function() {
-                url = $("select.receptor").val() + '/' + $("select.method").val()
-                console.log(url)
-                $("select.receptor").val() + '/' + $("select.method").val()
-                $.get(url, function(data) {
-                    console.log(data.slice(1,200))
-                    $('div.content').html(data);
-                });
-            });
+        <script src={{url_for( "static", filename="js/script.js" )}}>
         </script>
     </body>
 </html>
