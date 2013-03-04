@@ -28,6 +28,10 @@ div#container {
 #graph {
 	height: 300px;
 	width: 60%;
-	background-color: steelblue;
 	float: right;
+}
+
+.chart rect {
+	fill: steelblue;
+	stroke: white;
 }
