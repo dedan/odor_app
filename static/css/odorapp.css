@@ -29,6 +29,7 @@ div#container {
 	height: 300px;
 	width: 60%;
 	float: right;
+	padding-top: 20px;
 }
 
 .chart rect {

@@ -40,16 +40,26 @@ function ordered_properties(json, proplist) {
 
 var w = 500;
 var h = 300;
+var padding = 30
 var chart = d3.select('#graph').append('svg')
     .attr('class', 'chart')
     .attr('width', w)
-    .attr('height', h);
+    .attr('height', h)
+    .append('g')
+        .attr("transform", "translate(" + padding + ",-5)")
+var yAxis = d3.svg.axis()
+                  .scale(d3.scale.linear().domain([0, 0]).range([0, 0]))
+                  .orient('left')
+                  .ticks(5)
+chart.append('g')
+    .attr('class', 'axis').call(yAxis)
+
 
 function render_graph() {
     var data = data_container.predictions.slice(0, data_container.count)
     var x = d3.scale.linear()
               .domain([0, data.length])
-              .range([0, w]);
+              .range([2, w-padding]);
 
     var y = d3.scale.linear()
               .domain([0, data[0].pred])
@@ -60,14 +70,14 @@ function render_graph() {
 
     rects.enter().append('rect')
         .attr('x', function(d, i) {return x(i) - .5; })
-        .attr('width', w / data.length)
+        .attr('width', (w-padding-2) / data.length)
         .attr('y', function(d) {return h - .5; })
 
     // update
     rects.transition()
         .duration(1000)
         .attr('x', function(d, i) {return x(i) - .5; })
-        .attr('width', w / data.length)
+        .attr('width', (w-padding-2) / data.length)
         .attr('y', function(d) {return y(d.pred) - .5; })
         .attr('height', function(d) {return h - y(d.pred); })
     rects.exit().remove()
@@ -75,11 +85,9 @@ function render_graph() {
     if (data_container.count == startcount) {
         var yAxis = d3.svg.axis()
                           .scale(y)
-                          .orient('right')
+                          .orient('left')
                           .ticks(5)
-        chart.append('g')
-            .attr('class', 'axis')
-            .call(yAxis)
+        chart.select('.axis').transition().duration(1000).call(yAxis)
     }
 }
 
