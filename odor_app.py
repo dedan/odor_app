@@ -21,7 +21,7 @@ def receptor_overview(receptor, method):
     print receptor, method
     predictions = data[method][receptor]['predictions']
     sorted_predictions = sorted(predictions, key=lambda x: x['pred'], reverse=True)
-    if request.headers['Content-Type'] == 'application/json':
+    if 'application/json' in request.headers['Accept']:
         return jsonify(predictions=sorted_predictions,
                        q2_score=data[method][receptor]['score'])
     else:
