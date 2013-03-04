@@ -1,4 +1,5 @@
 var data_container = {predictions: [], count: 0}
+var startcount = 10
 
 function reload_data() {
         url = $("select.receptor").val() + '/' + $("select.method").val()
@@ -6,7 +7,7 @@ function reload_data() {
         $("select.receptor").val() + '/' + $("select.method").val()
         $.getJSON(url, function(response) {
             data_container.predictions = response.predictions;
-            data_container.count = 10
+            data_container.count = startcount
             $('#score').html(response.q2_score)
             console.log('data received');
             render_graph()
@@ -52,7 +53,7 @@ function render_graph() {
 
     var y = d3.scale.linear()
               .domain([0, data[0].pred])
-              .rangeRound([0, h]);
+              .rangeRound([h, 0]);
 
     var rects = chart.selectAll('rect')
         .data(data)
@@ -67,9 +68,19 @@ function render_graph() {
         .duration(1000)
         .attr('x', function(d, i) {return x(i) - .5; })
         .attr('width', w / data.length)
-        .attr('y', function(d) {return h - y(d.pred) - .5; })
-        .attr('height', function(d) {return y(d.pred); })
+        .attr('y', function(d) {return y(d.pred) - .5; })
+        .attr('height', function(d) {return h - y(d.pred); })
     rects.exit().remove()
+
+    if (data_container.count == startcount) {
+        var yAxis = d3.svg.axis()
+                          .scale(y)
+                          .orient('right')
+                          .ticks(5)
+        chart.append('g')
+            .attr('class', 'axis')
+            .call(yAxis)
+    }
 }
 
 $("select").change(reload_data);
