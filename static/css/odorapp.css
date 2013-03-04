@@ -19,3 +19,15 @@ body {
 div#container {
     padding-top: 20px;
 }
+
+#selector {
+	width: 40%;
+	float: left;
+}
+
+#graph {
+	height: 300px;
+	width: 60%;
+	background-color: steelblue;
+	float: right;
+}
