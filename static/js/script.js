@@ -20,7 +20,7 @@ function render_table() {
     rows.exit().remove()
 
     var cells = rows.selectAll("td").data(function(d) {
-        return jsonToArray(d);
+        return ordered_properties(d, ['name', 'CID', 'pred']);
     });
     cells.enter().append("td")
     cells.text(function(d) {
@@ -28,17 +28,10 @@ function render_table() {
     });
 }
 
-function jsonKeyValueToArray(k, v) {
-    return [k, v];
-}
-
-function jsonToArray(json) {
+function ordered_properties(json, proplist) {
     var ret = new Array();
-    var key;
-    for (key in json) {
-        if (json.hasOwnProperty(key)) {
-            ret.push(jsonKeyValueToArray(key, json[key]));
-        }
+    for (i in proplist) {
+        ret.push([proplist[i], json[proplist[i]]]);
     }
     return ret;
 }
