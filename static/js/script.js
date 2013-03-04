@@ -54,13 +54,22 @@ function render_graph() {
               .domain([0, data[0].pred])
               .rangeRound([0, h]);
 
-    chart.selectAll('rect')
+    var rects = chart.selectAll('rect')
         .data(data)
-      .enter().append('rect')
+
+    rects.enter().append('rect')
         .attr('x', function(d, i) {return x(i) - .5; })
-        .attr('y', function(d) {return h - y(d.pred) - .5; })
         .attr('width', w / data.length)
+        .attr('y', function(d) {return h - .5; })
+
+    // update
+    rects.transition()
+        .duration(1000)
+        .attr('x', function(d, i) {return x(i) - .5; })
+        .attr('width', w / data.length)
+        .attr('y', function(d) {return h - y(d.pred) - .5; })
         .attr('height', function(d) {return y(d.pred); })
+    rects.exit().remove()
 }
 
 $("select").change(reload_data);
