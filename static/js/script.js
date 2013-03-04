@@ -12,20 +12,15 @@ function reload_data() {
     }
 
 function render_table(tmp_data) {
-    d3.select("tbody").selectAll("tr").remove();
-    // Rows
-    var tr = d3.select("tbody")
-               .selectAll("tr")
-               .data(tmp_data)
-               .enter()
-               .append("tr")
+    var rows = d3.select("tbody").selectAll("tr").data(tmp_data)
+    rows.enter().append("tr")
+    rows.exit().remove()
 
-    // Cells
-    var td = tr.selectAll("td").data(function(d) {
+    var cells = rows.selectAll("td").data(function(d) {
         return jsonToArray(d);
-    }).enter()
-      .append("td")
-      .text(function(d) {
+    });
+    cells.enter().append("td")
+    cells.text(function(d) {
         return d[1];
     });
 }
