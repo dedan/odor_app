@@ -37,5 +37,10 @@ function ordered_properties(json, proplist) {
 }
 
 $("select").change(reload_data);
+$("#butti").click(function () {
+    console.log('bla')
+    data_container.count += 10;
+    render_table();
+});
 $(reload_data)
 
