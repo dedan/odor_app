@@ -11,31 +11,39 @@
     </head>
 
     <body>
-        <form id='selector'>
+        <a href="#helpmodal" role="button" class="btn" data-toggle="modal" id='help'>Help</a>
+        <form>
             <fieldset>
                 <legend>Predictions for receptor and method</legend>
-                <label>Receptor</label>
-                <select name="receptor" class="receptor">
-                    {% for receptor in receptors %}
-                        <option>{{ receptor }}</option>
-                    {% endfor %}
-                </select>
-                <label>Method</label>
-                <select name="method" class="method">
-                    {% for method in methods %}
-                        <option>{{ method }}</option>
-                    {% endfor %}
-                </select>
+                <div class='row'>
+                    <div class='span3'>
+                        <label>Receptor</label>
+                        <select name="receptor" class="receptor">
+                            {% for receptor in receptors %}
+                                <option>{{ receptor }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class='span3'>
+                        <label>Method</label>
+                        <select name="method" class="method">
+                            {% for method in methods %}
+                                <option>{{ method }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
             </fieldset>
         </form>
-        <a href="#helpmodal" role="button" class="btn" data-toggle="modal">Help</a>
         <p id='q2score'>
             q2 score:
             <span id='score'></span>
             <span id='score_label' class="label"></span>
         </p>
+        <div class='row'>
+            <div class='span12' id='graph'></div>
+        </div>
         <button class="btn" id="more">more</button>
-        <div id='graph'></div>
         {% include 'helpmodal.html' %}
         <div id="container">
             <table class="table table-striped">

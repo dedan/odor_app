@@ -5,7 +5,6 @@
     border: 1px solid #d0d0d0;
     background-color: #f0f0f0;
 }
-
 .code span.xtra {
     display: block;
 }
@@ -16,14 +15,14 @@ body {
     padding-top: 30px;
 }
 
+#help {
+	float: right;
+}
+
 #container {
     padding-top: 30px;
 }
 
-#selector {
-	width: 40%;
-	float: left;
-}
 
 #graph {
 	height: 300px;
@@ -53,6 +52,3 @@ rect.active {
     font-size: 11px;
 }
 
-#q2score {
-	padding-top: 20px;
-}
