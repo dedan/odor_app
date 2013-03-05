@@ -1,15 +1,20 @@
 var data_container = {predictions: [], count: 0}
 var startcount = 10
+$("select").change(reload_data);
+$("#butti").click(function () {
+    data_container.count += 10;
+    render_graph();
+    render_table();
+});
+$(reload_data)
 
 function reload_data() {
         url = $("select.receptor").val() + '/' + $("select.method").val()
-        console.log(url)
         $("select.receptor").val() + '/' + $("select.method").val()
         $.getJSON(url, function(response) {
             data_container.predictions = response.predictions;
             data_container.count = startcount
             $('#score').html(response.q2_score)
-            console.log('data received');
             render_graph()
             render_table()
         });
@@ -55,6 +60,12 @@ chart.append('g')
     .attr('class', 'axis').call(yAxis)
 
 
+function mouseover(d) {
+    d3.select(this).classed('active', true)
+}
+function mouseout(d) {
+    d3.select(this).classed('active', false)
+}
 function render_graph() {
     var data = data_container.predictions.slice(0, data_container.count)
     var x = d3.scale.linear()
@@ -72,6 +83,9 @@ function render_graph() {
         .attr('x', function(d, i) {return x(i) - .5; })
         .attr('width', (w-padding-2) / data.length)
         .attr('y', function(d) {return h - .5; })
+        .on('mouseover', mouseover)
+        .on('mouseout', mouseout)
+
 
     // update
     rects.transition()
@@ -91,12 +105,4 @@ function render_graph() {
     }
 }
 
-$("select").change(reload_data);
-$("#butti").click(function () {
-    console.log('bla')
-    data_container.count += 10;
-    render_graph();
-    render_table();
-});
-$(reload_data)
 

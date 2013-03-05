@@ -16,8 +16,8 @@ body {
     padding-top: 30px;
 }
 
-div#container {
-    padding-top: 20px;
+#container {
+    padding-top: 30px;
 }
 
 #selector {
@@ -35,6 +35,10 @@ div#container {
 .chart rect {
 	fill: steelblue;
 	stroke: white;
+}
+
+rect.active {
+	fill: lightblue;
 }
 
 .axis path,
