@@ -3,7 +3,7 @@ var startcount = 10
 
 $(reload_data)
 $("select").change(reload_data);
-$("#butti").click(function () {
+$("#more").click(function () {
     data_container.count += 10;
     render_graph();
     render_table();

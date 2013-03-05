@@ -21,12 +21,8 @@ def receptor_overview(receptor, method):
     print receptor, method
     predictions = data[method][receptor]['predictions']
     sorted_predictions = sorted(predictions, key=lambda x: x['pred'], reverse=True)
-    if 'application/json' in request.headers['Accept']:
-        return jsonify(predictions=sorted_predictions,
-                       q2_score=data[method][receptor]['score'])
-    else:
-        return render_template('table.html', predictions=sorted_predictions)
-
+    return jsonify(predictions=sorted_predictions,
+                   q2_score=data[method][receptor]['score'])
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
