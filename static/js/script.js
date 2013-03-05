@@ -1,12 +1,13 @@
-var data_container = {predictions: [], count: 0}
+var data_container = {predictions: [], count: 0, score: 0}
 var startcount = 10
+
+$(reload_data)
 $("select").change(reload_data);
 $("#butti").click(function () {
     data_container.count += 10;
     render_graph();
     render_table();
 });
-$(reload_data)
 
 function reload_data() {
         url = $("select.receptor").val() + '/' + $("select.method").val()
@@ -14,11 +15,27 @@ function reload_data() {
         $.getJSON(url, function(response) {
             data_container.predictions = response.predictions;
             data_container.count = startcount
-            $('#score').html(response.q2_score)
+            data_container.score = response.q2_score
             render_graph()
             render_table()
+            update_q2()
         });
     }
+
+function update_q2() {
+    if (data_container.score > 0.4) {
+        var score_label = 'good'
+        var score_class = 'label label-success'
+    } else if (data_container.score > 0.2) {
+        var score_label = 'low'
+        var score_class = 'label label-warning'
+    } else {
+        var score_label = 'very low'
+        var score_class = 'label label-important'
+    }
+    $('#score').html(data_container.score)
+    $('#score_label').html(score_label).removeClass().addClass(score_class)
+}
 
 function render_table() {
     tmp_data = data_container.predictions.slice(0, data_container.count)

@@ -52,3 +52,7 @@ rect.active {
     font-family: sans-serif;
     font-size: 11px;
 }
+
+#q2score {
+	padding-top: 20px;
+}
