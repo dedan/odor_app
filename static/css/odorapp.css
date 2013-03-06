@@ -24,9 +24,8 @@ body {
     padding-top: 30px;
 }
 
-svg, #graph{
-    height: 300px;
-    width: 100%;
+#graph{
+    height: 250px;
 }
 
 .chart rect {
@@ -50,3 +49,6 @@ rect.active {
     font-size: 11px;
 }
 
+#controls {
+    margin: 20px;
+}
