@@ -8,6 +8,13 @@ $("#more-btn").click(function () {
     render_graph();
     render_table();
 });
+$("#less-btn").click(function () {
+    if (data_container.count > 10) {
+        data_container.count -= 10;
+        render_graph();
+        render_table();
+    }
+});
 $("#all-btn").click(function () {
     data_container.count = data_container.predictions.length;
     render_graph();
