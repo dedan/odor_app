@@ -12,7 +12,9 @@
 
     <body>
         {% include 'helpmodal.html' %}
-        <a href="#helpmodal" role="button" class="btn" data-toggle="modal" id='help'>Help</a>
+        <a href="#helpmodal" role="button" class="btn" data-toggle="modal" id='help'>
+            <i class='icon-question-sign'></i> Help
+        </a>
         <form>
             <fieldset>
                 <legend>Predictions for receptor and method</legend>
@@ -49,9 +51,16 @@
             </div>
             <div class='span8' id='graph'></div>
         </div>
-        <div id='controls'>
-            <button class="btn" id="more">more</button>
-            <button class="btn" id='table_button'>show table</button>
+        <div id='controls' class='row'>
+            <button class="btn span2" id='table_button'>
+                <i class='icon-list'></i> show table
+            </button>
+            <button class="btn span2 offset2" id="more-btn">
+                <i class='icon-chevron-right'></i> more
+            </button>
+            <button class="btn span2" id="all-btn">
+                <i class='icon-fast-forward'></i> all
+            </button>
         </div>
         <div id="container">
             <table class="table table-striped">

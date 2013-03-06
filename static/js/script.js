@@ -3,8 +3,13 @@ var startcount = 10
 
 $(reload_data)
 $("select").change(reload_data);
-$("#more").click(function () {
+$("#more-btn").click(function () {
     data_container.count += 10;
+    render_graph();
+    render_table();
+});
+$("#all-btn").click(function () {
+    data_container.count = data_container.predictions.length;
     render_graph();
     render_table();
 });
@@ -141,6 +146,9 @@ function render_graph() {
                           .orient('left')
                           .ticks(5)
         chart.select('.axis').transition().duration(1000).call(yAxis)
+    }
+    if (data_container.count > 100) {
+        rects.attr('stroke-width', 0)
     }
 }
 
