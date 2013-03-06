@@ -101,14 +101,14 @@ function mouseover(d) {
     $('#chemname').html(d.name)
     $('#pred').html(d.pred)
     $('#CID').html(d.CID)
-    d3.select("tbody").selectAll("tr").classed("active", function (p) {return p === d;})
+    d3.select("#table-body").selectAll("tr").classed("active", function (p) {return p === d;})
 }
 function mouseout(d) {
     d3.select(this).classed('active', false)
     $('#chemname').html('')
     $('#pred').html('')
     $('#CID').html('')
-    d3.select("tbody").selectAll("tr").classed("active", false)
+    d3.select("#table-body").selectAll("tr").classed("active", false)
 }
 function render_graph() {
     var data = data_container.predictions.slice(0, data_container.count)
