@@ -22,15 +22,8 @@ function reload_data() {
             render_graph()
             render_table()
             update_q2()
-            reset_info()
         });
     }
-
-function reset_info () {
-    $('#chemname').html('')
-    $('#pred').html('')
-    $('#CID').html('')
-}
 
 function update_q2() {
     if (data_container.score > 0.4) {
@@ -50,7 +43,10 @@ function update_q2() {
 function render_table() {
     tmp_data = data_container.predictions.slice(0, data_container.count)
     var rows = d3.select("tbody").selectAll("tr").data(tmp_data)
-    rows.enter().append("tr")
+    rows.enter()
+      .append("tr")
+      .on('mouseover', table_mouseover)
+      .on('mouseout', table_mouseout)
     rows.exit().remove()
 
     var cells = rows.selectAll("td").data(function(d) {
@@ -86,15 +82,28 @@ var yAxis = d3.svg.axis()
 chart.append('g')
     .attr('class', 'axis').call(yAxis)
 
+function table_mouseover(d) {
+    d3.select(this).classed('active', true)
+    d3.select("svg").selectAll("rect").classed("active", function (p) {return p === d;})
+}
+function table_mouseout(d) {
+    d3.select(this).classed('active', false)
+    d3.select("svg").selectAll("rect").classed("active", false)
+}
 
 function mouseover(d) {
     d3.select(this).classed('active', true)
     $('#chemname').html(d.name)
     $('#pred').html(d.pred)
     $('#CID').html(d.CID)
+    d3.select("tbody").selectAll("tr").classed("active", function (p) {return p === d;})
 }
 function mouseout(d) {
     d3.select(this).classed('active', false)
+    $('#chemname').html('')
+    $('#pred').html('')
+    $('#CID').html('')
+    d3.select("tbody").selectAll("tr").classed("active", false)
 }
 function render_graph() {
     var data = data_container.predictions.slice(0, data_container.count)

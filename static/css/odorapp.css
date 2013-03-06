@@ -37,6 +37,10 @@ rect.active {
 	fill: lightblue;
 }
 
+tr.active {
+    font-weight: bold;
+}
+
 .axis path,
 .axis line {
     fill: none;
