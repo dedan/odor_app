@@ -23,12 +23,9 @@ body {
     padding-top: 30px;
 }
 
-
-#graph {
-	height: 300px;
-	width: 60%;
-	float: right;
-	padding-top: 20px;
+svg, #graph{
+    height: 300px;
+    width: 100%;
 }
 
 .chart rect {

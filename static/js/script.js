@@ -60,15 +60,14 @@ function ordered_properties(json, proplist) {
     return ret;
 }
 
-var w = 500;
-var h = 300;
 var padding = 30
+var w = $("#graph").width();
+var h = $("#graph").height();
 var chart = d3.select('#graph').append('svg')
     .attr('class', 'chart')
-    .attr('width', w)
     .attr('height', h)
     .append('g')
-        .attr("transform", "translate(" + padding + ",-5)")
+       .attr("transform", "translate(" + padding + ",-5)")
 var yAxis = d3.svg.axis()
                   .scale(d3.scale.linear().domain([0, 0]).range([0, 0]))
                   .orient('left')
