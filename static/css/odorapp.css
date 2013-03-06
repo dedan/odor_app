@@ -52,3 +52,7 @@ rect.active {
 #controls {
     margin: 20px;
 }
+
+.score_div {
+    padding: 5px;
+}

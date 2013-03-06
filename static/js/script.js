@@ -22,8 +22,15 @@ function reload_data() {
             render_graph()
             render_table()
             update_q2()
+            reset_info()
         });
     }
+
+function reset_info () {
+    $('#chemname').html('')
+    $('#pred').html('')
+    $('#CID').html('')
+}
 
 function update_q2() {
     if (data_container.score > 0.4) {
@@ -82,6 +89,9 @@ chart.append('g')
 
 function mouseover(d) {
     d3.select(this).classed('active', true)
+    $('#chemname').html(d.name)
+    $('#pred').html(d.pred)
+    $('#CID').html(d.CID)
 }
 function mouseout(d) {
     d3.select(this).classed('active', false)
