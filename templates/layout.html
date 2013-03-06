@@ -64,7 +64,12 @@
         </div>
         <div id="container">
             <table class="table table-striped">
-                <thead></thead><tbody></tbody>
+                <thead>
+                    <td>Name</td>
+                    <td>Pubchem ID</td>
+                    <td>predicted response</td>
+                </thead>
+                <tbody id='table-body'></tbody>
             </table>
         </div>
         <script src={{url_for( "static", filename="js/script.js" )}}></script>

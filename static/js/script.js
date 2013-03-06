@@ -47,7 +47,7 @@ function update_q2() {
 
 function render_table() {
     tmp_data = data_container.predictions.slice(0, data_container.count)
-    var rows = d3.select("tbody").selectAll("tr").data(tmp_data)
+    var rows = d3.select("#table-body").selectAll("tr").data(tmp_data)
     rows.enter()
       .append("tr")
       .on('mouseover', table_mouseover)

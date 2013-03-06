@@ -1,26 +1,39 @@
 <div id='helpmodal' class="modal hide fade">
     <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-            &times;
-        </button>
-        <h3>
-            Modal header
-        </h3>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>info / help</h3>
     </div>
     <div class="modal-body">
         <p>
-            machine readable version of the data at URLs of form:
+            This application is a byproduct of the master thesis of Stephan Gabler. The idea is to predict responses of odor receptors to molecules which were not previously tested for this receptor. The models are based on support vector regression with different chemical descriptors. A detailed description of the whole procedure can hopefully soon be found in Molecular Informatics.
+        </p>
+        <p>
+            The predictive power of all models was estimated by a cross-validation (CV) like bootstrap technique. This value can be used to assess how reliable the predictions of a model are.
+            <table>
+                <tr>
+                    <td><span class="label label-important">0 &lt; q2 &lt; 0.2</span></td>
+                    <td>very low generalization score, don't rely on these predictions</td>
+                </tr>
+                <tr>
+                    <td><span class="label label-warning">0.2 &lt; q2 &lt; 0.4</span></td>
+                    <td>low generalization score, predictions might not be correct</td>
+                </tr>
+                <tr>
+                    <td><span class="label label-success">0.4 &gt; q2</span></td>
+                    <td>high generalization score, model showed generalization in CV</td>
+                </tr>
+            </table>
+        </p>
+        <p>
+            In case you have any questions, never hesitate to contact me: stephan.gabler.removethispart@gmail.com
+        </p>
+        <p>
+            A machine readable version (JSON) of the data can be obtained from this service at endpoints with the following structure:
             <br>
-            <div class="code">
-                /receptor_name/method
-            </div>
-            <br>
-            with Content-Type: 'application/json'
+            <div class="code">/receptor_name/method</div>
         </p>
     </div>
     <div class="modal-footer">
-        <button class="btn" data-dismiss="modal" aria-hidden="true">
-            Close
-        </button>
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
     </div>
 </div>
