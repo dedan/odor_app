@@ -8,6 +8,9 @@ $("#more").click(function () {
     render_graph();
     render_table();
 });
+$("#table_button").click(function () {
+    $("#container").slideToggle('slow')
+})
 
 function reload_data() {
         url = $("select.receptor").val() + '/' + $("select.method").val()
@@ -65,6 +68,7 @@ var w = $("#graph").width();
 var h = $("#graph").height();
 var chart = d3.select('#graph').append('svg')
     .attr('class', 'chart')
+    .attr('width', w)
     .attr('height', h)
     .append('g')
        .attr("transform", "translate(" + padding + ",-5)")
