@@ -59,12 +59,12 @@ function render_table() {
       .append("tr")
       .on('mouseover', table_mouseover)
       .on('mouseout', table_mouseout)
-    rows.exit().remove()
+    rows.exit().remove();
 
     var cells = rows.selectAll("td").data(function(d) {
-        return ordered_properties(d, ['name', 'CID', 'pred']);
+        return ordered_properties(d, ['name', 'CID', 'prediction']);
     });
-    cells.enter().append("td")
+    cells.enter().append("td");
     cells.text(function(d) {
         return d[1];
     });
@@ -106,8 +106,8 @@ function table_mouseout(d) {
 function mouseover(d) {
     d3.select(this).classed('active', true)
     $('#chemname').html(d.name)
-    $('#pred').html(d.pred)
-    $('#CID').html(d.CID)
+    $('#pred').html(d.prediction)
+    $('#smile').html(d.smile)
     d3.select("#table-body").selectAll("tr").classed("active", function (p) {return p === d;})
 }
 function mouseout(d) {
@@ -115,6 +115,7 @@ function mouseout(d) {
     $('#chemname').html('')
     $('#pred').html('')
     $('#CID').html('')
+    $('#smile').html('')
     d3.select("#table-body").selectAll("tr").classed("active", false)
 }
 function render_graph() {
@@ -124,7 +125,7 @@ function render_graph() {
               .range([2, w-padding]);
 
     var y = d3.scale.linear()
-              .domain([0, data[0].pred])
+              .domain([0, data[0].prediction])
               .rangeRound([h, 0]);
 
     var rects = chart.selectAll('rect')
@@ -143,8 +144,8 @@ function render_graph() {
         .duration(1000)
         .attr('x', function(d, i) {return x(i) - .5; })
         .attr('width', (w-padding-2) / data.length)
-        .attr('y', function(d) {return y(d.pred) - .5; })
-        .attr('height', function(d) {return h - y(d.pred); })
+        .attr('y', function(d) {return y(d.prediction) - .5; })
+        .attr('height', function(d) {return h - y(d.prediction); })
     rects.exit().remove()
 
     if (data_container.count == startcount) {
