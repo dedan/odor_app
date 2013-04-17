@@ -24,6 +24,10 @@ var odor = odor || {};
       var data = data_container.target_data;
       data.sort(function (a, b) {return a.target - b.target;});
       data.reverse();
+      var plot_data = [];
+      for (var i = 0; i < data.length; i++) {
+          plot_data.push([data[i], data[i]]);
+      }
       var x = d3.scale.linear()
                 .domain([0, data.length])
                 .range([2, w-padding]);
@@ -32,11 +36,15 @@ var odor = odor || {};
                 .domain([0, data[0].target])
                 .rangeRound([h, 0]);
 
-      var rects = targetGraph.selectAll('rect')
-          .data(data);
+      var gs = targetGraph.selectAll('g.rects')
+          .data(plot_data);
+      gs.enter().append('g').attr('class', 'rects');
+      gs.exit().remove()
 
+      var rects = gs.selectAll('rect')
+        .data(Object);
       rects.enter().append('rect')
-          .attr('x', function(d, i) {return x(i) - 0.5; })
+          .attr('x', function(d, i, j) {return x(j) - 0.5; })
           .attr('width', (w-padding-2) / data.length)
           .attr('y', function(d) {return h - 0.5; })
           .on('mouseover', mouseover)
@@ -45,8 +53,11 @@ var odor = odor || {};
       // update
       rects.transition()
           .duration(1000)
-          .attr('y', function(d) {return y(d.target) - 0.5; })
-          .attr('height', function(d) {return h - y(d.target); });
+          .attr('x', function(d, i, j) {return x(j) - 0.5; })
+          .attr('width', (w-padding-2) / data.length)
+          .attr('y', function(d, i) {return i === 0 ? y(d.target) - 0.5 : y(Math.max(0, d.oob_prediction.oob_mean)) - 0.5; })
+          .attr('height', function(d, i) {return i === 0 ? h - y(d.target) : h - y(Math.max(0, d.oob_prediction.oob_mean)); })
+          .attr('class', function (d, i) {return (i === 1) ? 'oob-prediction' : null;});
       rects.exit().remove();
 
       var yAxis = d3.svg.axis()
