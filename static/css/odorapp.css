@@ -24,7 +24,7 @@ body {
     padding-top: 30px;
 }
 
-#graph{
+.predictions-graph, .target-graph{
     height: 250px;
 }
 

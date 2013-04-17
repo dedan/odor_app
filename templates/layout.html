@@ -50,7 +50,7 @@
                 <div>Predicted Value: <span id='pred'></span></div>
                 <div>Smile: <span id='smile'></span></div>
             </div>
-            <div class='span7' id='graph'></div>
+            <div class='span7 predictions-graph'></div>
         </div>
         <div id='controls' class='row'>
             <button class="btn span2" id='table_button'>
@@ -66,6 +66,7 @@
                 <i class='icon-fast-forward'></i> all
             </button>
         </div>
+        <div class="target-graph"></div>
         <div id="container">
             <table class="table table-striped">
                 <thead>
@@ -76,6 +77,8 @@
                 <tbody id='table-body'></tbody>
             </table>
         </div>
+        <script src={{url_for( "static", filename="js/predictionsGraph.js" )}}></script>
+        <script src={{url_for( "static", filename="js/targetGraph.js" )}}></script>
         <script src={{url_for( "static", filename="js/script.js" )}}></script>
     </body>
 </html>
