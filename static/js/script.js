@@ -36,6 +36,7 @@ function reload_data() {
                 return ("target" in e);
             });
             odor.render_target_graph();
+            odor.render_target_graph_scatter();
             odor.render_graph();
             render_table();
             update_q2();
