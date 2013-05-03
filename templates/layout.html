@@ -1,86 +1,70 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <title>odor receptor predictions</title>
-        <link href={{url_for( "static", filename="css/bootstrap.css" )}} rel="stylesheet" type="text/css" />
-        <link href={{url_for( "static", filename="css/odorapp.css" )}} rel="stylesheet" type="text/css" />
-        <script src={{url_for( "static", filename="js/jquery-1.9.0.js" )}}></script>
-        <script src={{url_for( "static", filename="js/bootstrap.js" )}}></script>
-        <script src={{url_for( "static", filename="js/d3.v3.js" )}}></script>
-    </head>
+  <head>
+    <meta charset="utf-8" />
+    <title>odor receptor predictions</title>
+    <link href={{url_for( "static", filename="css/bootstrap.css" )}} rel="stylesheet" type="text/css" />
+    <link href={{url_for( "static", filename="css/odorapp.css" )}} rel="stylesheet" type="text/css" />
+    <script src={{url_for( "static", filename="js/jquery-1.9.0.js" )}}></script>
+    <script src={{url_for( "static", filename="js/bootstrap.js" )}}></script>
+    <script src={{url_for( "static", filename="js/d3.v3.js" )}}></script>
+  </head>
 
-    <body>
-        {% include 'helpmodal.html' %}
-        <a href="#helpmodal" role="button" class="btn" data-toggle="modal" id='help'>
-            <i class='icon-question-sign'></i> Help
-        </a>
-        <form>
-            <fieldset>
-                <legend>Predictions for receptor and method</legend>
-                <div class='row'>
-                    <div class='span3'>
-                        <label>Receptor</label>
-                        <select name="receptor" class="receptor">
-                            {% for receptor in receptors %}
-                                <option>{{ receptor }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                    <div class='span3'>
-                        <label>Method</label>
-                        <select name="method" class="method">
-                            {% for method in methods %}
-                                <option>{{ method }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                </div>
-            </fieldset>
-        </form>
-        <div class='row'>
-            <div class='span4' id='info'>
-                <div class='score_div'>
-                    q2 score:
-                    <span id='score'></span>
-                    <span id='score_label' class="label"></span>
-                </div>
-                <div>Name: <span id='chemname'></span></div>
-                <div>Pubchem ID: <span id='CID'></span></div>
-                <div>Predicted Value: <span id='pred'></span></div>
-                <div>Smile: <span id='smile'></span></div>
-            </div>
-            <div class='span7 predictions-graph'></div>
-        </div>
-        <div id='controls' class='row'>
-            <button class="btn span2" id='table_button'>
-                <i class='icon-list'></i> show table
-            </button>
-            <button class="btn span2 offset2" id="less-btn">
-                <i class='icon-chevron-left'></i> less
-            </button>
-            <button class="btn span2" id="more-btn">
-                <i class='icon-chevron-right'></i> more
-            </button>
-            <button class="btn span2" id="all-btn">
-                <i class='icon-fast-forward'></i> all
-            </button>
-        </div>
-        <div class="target-graph-scatter"></div>
-        <div class="target-graph"></div>
-        <div id="container">
-            <table class="table table-striped">
-                <thead>
-                    <td>Name</td>
-                    <td>Pubchem ID</td>
-                    <td>predicted response</td>
-                </thead>
-                <tbody id='table-body'></tbody>
-            </table>
-        </div>
-        <script src={{url_for( "static", filename="js/predictionsGraph.js" )}}></script>
-        <script src={{url_for( "static", filename="js/targetGraph.js" )}}></script>
-        <script src={{url_for( "static", filename="js/targetGraphScatter.js" )}}></script>
-        <script src={{url_for( "static", filename="js/script.js" )}}></script>
-    </body>
+  <body>
+    {% include 'helpmodal.html' %}
+    <a href="#helpmodal" class="btn" data-toggle="modal" id='help'>
+      <i class='icon-question-sign'></i> Help
+    </a>
+    <form class="model-select">
+      <fieldset>
+        <legend>Predictions for receptor and method</legend>
+          <label>Receptor</label>
+          <select name="receptor" class="receptor">
+            {% for receptor in receptors %}<option>{{ receptor }}</option>{% endfor %}
+          </select>
+          <label>Method</label>
+          <select name="method" class="method">
+            {% for method in methods %}<option>{{ method }}</option>{% endfor %}
+          </select>
+      </fieldset>
+      <dl>
+        <dt>q2 score: </dt>
+        <dd id='score'></dd>
+        <dd><span id='score_label' class="label"></span></dd>
+      </dl>
+    </form>
+
+    <dl class="pred-info">
+      <dt>Name: </dt><dd id='chemname'> </dd>
+      <dt>Predicted Value: </dt><dd id='pred'> </dd>
+      <dt>Smile: </dt><dd id='smile'> </dd>
+    </dl>
+
+    <div class='predictions-graph'></div>
+    <div id='controls'>
+      <button class="btn" id="less-btn"><i class='icon-chevron-left'></i> less</button>
+      <button class="btn" id="more-btn"><i class='icon-chevron-right'></i> more</button>
+      <button class="btn" id="all-btn"><i class='icon-fast-forward'></i> all</button>
+    </div>
+
+    <div class="target-graphs">
+      <div class="target-graph-scatter"></div>
+      <div class="target-graph invisible"></div>
+      <button class="btn" id="btn-scatter" disabled>scatter</button>
+      <button class="btn" id="btn-bar">bar</button>
+    </div>
+
+    <button class="btn" id='table_button'><i class='icon-list'></i> show table</button>
+    <table class="table table-striped">
+      <thead>
+        <td>Name</td>
+        <td>predicted response</td>
+      </thead>
+      <tbody id='table-body'></tbody>
+    </table>
+    <script src={{url_for( "static", filename="js/predictionsGraph.js" )}}></script>
+    <script src={{url_for( "static", filename="js/targetGraph.js" )}}></script>
+    <script src={{url_for( "static", filename="js/targetGraphScatter.js" )}}></script>
+    <script src={{url_for( "static", filename="js/script.js" )}}></script>
+  </body>
 </html>

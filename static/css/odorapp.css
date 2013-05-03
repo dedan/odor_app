@@ -10,27 +10,34 @@
 }
 
 body {
-    width: 80%;
-    margin-left: 5%;
-    padding-top: 30px;
+    margin: 50px;
 }
 
 #help {
-	float: right;
+    float: right;
 }
 
-#container {
+.model-select {
+    width: 40%;
+}
+
+.table {
     display: none;
     padding-top: 30px;
 }
 
 .predictions-graph, .target-graph, .target-graph-scatter{
     height: 250px;
+    width: 40%;
+}
+
+.invisible {
+    display: none;
 }
 
 .chart rect {
-	fill: steelblue;
-	stroke: white;
+    fill: steelblue;
+    stroke: white;
 }
 
 .target-graph rect{
@@ -38,7 +45,7 @@ body {
 }
 
 rect.active {
-	fill: lightblue;
+    fill: lightblue;
 }
 
 rect.oob-prediction {
@@ -63,8 +70,4 @@ tr.active {
 
 #controls {
     margin: 20px;
-}
-
-.score_div {
-    padding: 5px;
 }

@@ -23,7 +23,19 @@ $("#all-btn").click(function () {
     render_table();
 });
 $("#table_button").click(function () {
-    $("#container").slideToggle('slow');
+    $(".table").slideToggle('slow');
+});
+$("#btn-scatter").click(function () {
+    $("#btn-scatter").prop("disabled", true);
+    $("#btn-bar").prop("disabled", false);
+    $(".target-graph-scatter").removeClass("invisible");
+    $(".target-graph").addClass("invisible");
+});
+$("#btn-bar").click(function () {
+    $("#btn-bar").prop("disabled", true);
+    $("#btn-scatter").prop("disabled", false);
+    $(".target-graph").removeClass("invisible");
+    $(".target-graph-scatter").addClass("invisible");
 });
 
 function reload_data() {
@@ -55,8 +67,8 @@ function update_q2() {
         score_label = 'very low';
         score_class = 'label label-important';
     }
-    $('#score').html(data_container.score);
-    $('#score_label').html(score_label).removeClass().addClass(score_class);
+    $('#score').text(data_container.score);
+    $('#score_label').text(score_label).removeClass().addClass(score_class);
 }
 
 function render_table() {
@@ -69,7 +81,7 @@ function render_table() {
     rows.exit().remove();
 
     var cells = rows.selectAll("td").data(function(d) {
-        return ordered_properties(d, ['name', 'CID', 'prediction']);
+        return ordered_properties(d, ['name', 'prediction']);
     });
     cells.enter().append("td");
     cells.text(function(d) {
@@ -105,7 +117,6 @@ function mouseout(d) {
     d3.select(this).classed('active', false);
     $('#chemname').html('');
     $('#pred').html('');
-    $('#CID').html('');
     $('#smile').html('');
     d3.select("#table-body").selectAll("tr").classed("active", false);
 }
