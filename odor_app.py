@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify, request
+from flask import Flask, render_template, jsonify
 import pickle
 import os
 
@@ -9,11 +9,13 @@ app.debug = DEBUG
 data_path = os.path.join(os.path.dirname(__file__), 'models')
 data = pickle.load(open(os.path.join(data_path, 'predictions.pkl')))
 methods = data.keys()
-receptors = data.values()[0].keys()
+receptors = sorted(data.values()[0].keys(), cmp=lambda x, y: cmp(x.lower(), y.lower()))
+
 
 @app.route('/')
 def index():
     return render_template('layout.html', receptors=receptors, methods=methods)
+
 
 @app.route('/<receptor>/<method>')
 def receptor_overview(receptor, method):
