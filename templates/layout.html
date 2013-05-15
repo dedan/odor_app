@@ -11,50 +11,66 @@
   </head>
 
   <body>
+    <h1>Predictions for receptor and method</h1>
     {% include 'helpmodal.html' %}
     <a href="#helpmodal" class="btn" data-toggle="modal" id='help'>
       <i class='icon-question-sign'></i> Help
     </a>
-    <form class="model-select">
-      <fieldset>
-        <legend>Predictions for receptor and method</legend>
-          <label>Receptor</label>
-          <select name="receptor" class="receptor">
-            {% for receptor in receptors %}<option>{{ receptor }}</option>{% endfor %}
-          </select>
-          <label>Method</label>
-          <select name="method" class="method">
-            {% for method in methods %}<option>{{ method }}</option>{% endfor %}
-          </select>
-      </fieldset>
-      <dl>
-        <dt>q2 score: </dt>
-        <dd id='score'></dd>
-        <dd><span id='score_label' class="label"></span></dd>
+    <div class='navigation-info row'>
+      <form class="model-select span4">
+        <label>Receptor</label>
+        <select name="receptor" class="receptor">
+          {% for receptor in receptors %}<option>{{ receptor }}</option>{% endfor %}
+        </select>
+        <label>Method</label>
+        <select name="method" class="method">
+          {% for method in methods %}<option>{{ method }}</option>{% endfor %}
+        </select>
+      </form>
+
+      <div class='span4'>
+        <dl>
+          <dt>q2 score</dt>
+          <dd id='score'></dd>
+          <dt>q2 quality</dt>
+          <dd><span id='score_label' class="label"></span></dd>
+          <dt># of training targets</dt>
+          <dd id='n-targets'></dd>
+        </dl>
+      </div>
+      <dl class="pred-info span4">
+        <dt>Name</dt><dd id='chemname'> </dd>
+        <dt>Predicted Value</dt><dd id='pred'> </dd>
+        <dt>Smile</dt><dd id='smile'> </dd>
+        <dt>True Value</dt><dd id='target'> </dd>
       </dl>
-    </form>
-
-    <dl class="pred-info">
-      <dt>Name: </dt><dd id='chemname'> </dd>
-      <dt>Predicted Value: </dt><dd id='pred'> </dd>
-      <dt>Smile: </dt><dd id='smile'> </dd>
-    </dl>
-
-    <div class='predictions-graph'></div>
-    <div id='controls'>
-      <button class="btn" id="less-btn"><i class='icon-chevron-left'></i> less</button>
-      <button class="btn" id="more-btn"><i class='icon-chevron-right'></i> more</button>
-      <button class="btn" id="all-btn"><i class='icon-fast-forward'></i> all</button>
     </div>
 
-    <div class="target-graphs">
-      <div class="target-graph-scatter"></div>
-      <div class="target-graph invisible"></div>
-      <button class="btn" id="btn-scatter" disabled>scatter</button>
-      <button class="btn" id="btn-bar">bar</button>
+    <div class='graphs row'>
+      <div class='left-graph span6'>
+        <div class='predictions-graph'></div>
+        <div class='controls'>
+          <button class="btn" id="only-10-btn"><i class='icon-fast-backward'></i> 10</button>
+          <button class="btn" id="less-btn"><i class='icon-chevron-left'></i> less</button>
+          <button class="btn" id="more-btn"><i class='icon-chevron-right'></i> more</button>
+          <button class="btn" id="all-btn"><i class='icon-fast-forward'></i> all</button>
+        </div>
+      </div>
+      <div class="right-graph span6">
+        <div class='target-graphs'>
+          <div class="target-graph-scatter"></div>
+          <div class="target-graph invisible"></div>
+        </div>
+        <div class='controls'>
+          <button class="btn" id="btn-scatter" disabled>scatter</button>
+          <button class="btn" id="btn-bar">bar</button>
+        </div>
+      </div>
     </div>
+
 
     <button class="btn" id='table_button'><i class='icon-list'></i> show table</button>
+    <div class='tabler'>
     <table class="table table-striped">
       <thead>
         <td>Name</td>
@@ -62,6 +78,7 @@
       </thead>
       <tbody id='table-body'></tbody>
     </table>
+    </div>
     <script src={{url_for( "static", filename="js/predictionsGraph.js" )}}></script>
     <script src={{url_for( "static", filename="js/targetGraph.js" )}}></script>
     <script src={{url_for( "static", filename="js/targetGraphScatter.js" )}}></script>

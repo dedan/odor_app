@@ -4,8 +4,9 @@ var odor = odor || {};
 (function () {
 
   var padding = 30;
-  var w = $(".target-graph").width();
-  var h = $(".target-graph").height();
+  var w = $(".target-graphs").width();
+  var h = $(".target-graphs").height();
+  console.log(w)
   var targetGraph = d3.select('.target-graph').append('svg')
       .attr('class', 'chart')
       .attr('width', w)

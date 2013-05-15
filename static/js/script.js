@@ -17,13 +17,18 @@ $("#less-btn").click(function () {
         render_table();
     }
 });
+$("#only-10-btn").click(function () {
+    data_container.count = 10;
+    odor.render_graph();
+    render_table();
+});
 $("#all-btn").click(function () {
     data_container.count = data_container.predictions.length;
     odor.render_graph();
     render_table();
 });
 $("#table_button").click(function () {
-    $(".table").slideToggle('slow');
+    $(".tabler").slideToggle('slow');
 });
 $("#btn-scatter").click(function () {
     $("#btn-scatter").prop("disabled", true);
@@ -69,6 +74,7 @@ function update_q2() {
     }
     $('#score').text(data_container.score);
     $('#score_label').text(score_label).removeClass().addClass(score_class);
+    $('#n-targets').text(data_container.target_data.length)
 }
 
 function render_table() {
@@ -111,6 +117,7 @@ function mouseover(d) {
     $('#chemname').html(d.name);
     $('#pred').html(d.prediction);
     $('#smile').html(d.smile);
+    if ('target' in d) $('#target').html(d.target)
     d3.select("#table-body").selectAll("tr").classed("active", function (p) {return p === d;});
 }
 function mouseout(d) {
@@ -118,5 +125,6 @@ function mouseout(d) {
     $('#chemname').html('');
     $('#pred').html('');
     $('#smile').html('');
+    $('#target').html('');
     d3.select("#table-body").selectAll("tr").classed("active", false);
 }

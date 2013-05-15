@@ -1,7 +1,7 @@
 var odor = odor || {};
 
 (function () {
-    var padding = 30;
+    var padding = 20;
     var w = $(".target-graph-scatter").width();
     var h = $(".target-graph-scatter").height();
     var r = 3;
@@ -56,7 +56,7 @@ var odor = odor || {};
         circles.enter().append('circle')
             .attr('cx', function(d) {return x(0) - 0.5; })
             .attr('cy', function(d) {return y(0) - 0.5; })
-            .attr('r', 3)
+            .attr('r', 4)
             .on('mouseover', mouseover)
             .on('mouseout', mouseout);
 

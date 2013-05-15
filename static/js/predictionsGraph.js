@@ -4,6 +4,8 @@ var odor = odor || {};
     var padding = 30;
     var w = $(".predictions-graph").width();
     var h = $(".predictions-graph").height();
+    console.log(w)
+    console.log(h)
     console.log('here');
     var chart = d3.select('.predictions-graph').append('svg')
         .attr('class', 'chart')
@@ -45,7 +47,7 @@ var odor = odor || {};
             .attr('x', function(d, i) {return x(i) - 0.5; })
             .attr('width', (w-padding-2) / data.length)
             .attr('y', function(d) {return y(d.prediction) - 0.5; })
-            .attr('height', function(d) {return h - y(d.prediction); });
+            .attr('height', function(d) {return h - y(d.prediction > 0 ? d.prediction : 0); });
         rects.exit().remove();
 
         if (data_container.count == startcount) {
