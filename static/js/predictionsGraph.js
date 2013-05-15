@@ -56,13 +56,11 @@ var odor = odor || {};
             .attr('height', function(d) {return h - y(d.prediction > 0 ? d.prediction : 0); });
         rects.exit().remove();
 
-        if (data_container.count == startcount) {
-            var yAxis = d3.svg.axis()
-                              .scale(y)
-                              .orient('left')
-                              .ticks(5);
-            chart.select('.axis').transition().duration(1000).call(yAxis);
-        }
+        var yAxis = d3.svg.axis()
+                          .scale(y)
+                          .orient('left')
+                          .ticks(5);
+        chart.select('.axis').transition().duration(1000).call(yAxis);
         if (data_container.count > 100) {
             rects.attr('stroke-width', 0);
         } else {

@@ -1,6 +1,5 @@
 // the data container
-data_container = {predictions: [], count: 0, score: 0};
-var startcount = 10;
+data_container = {predictions: [], count: 10, score: 0};
 
 // on load --> get data and bind events
 $(reload_data);
@@ -47,7 +46,6 @@ function reload_data() {
         url = $("select.receptor").val() + '/' + $("select.method").val();
         $.getJSON(url, function(response) {
             data_container.predictions = response.predictions;
-            data_container.count = startcount;
             data_container.score = response.q2_score;
             data_container.target_data = data_container.predictions.filter(function (e) {
                 return ("target" in e);
