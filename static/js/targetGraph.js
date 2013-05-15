@@ -27,6 +27,23 @@ var odor = odor || {};
     .attr("transform", "rotate(-90)")
     .text("oob prediction (q2)");
 
+  targetGraph.append("text")
+    .attr("class", "legend")
+    .attr("text-anchor", "end")
+    .attr("x", w - padding)
+    .attr("y", padding)
+    .attr("fill", "red")
+    .attr("opacity", 0.5)
+    .text("oob-prediction");
+  targetGraph.append("text")
+    .attr("class", "legend")
+    .attr("text-anchor", "end")
+    .attr("x", w - padding)
+    .attr("y", padding - 15)
+    .attr("fill", "steelblue")
+    .attr("opacity", 0.5)
+    .text("true target");
+
   odor.render_target_graph = function () {
       var data = data_container.target_data;
       data.sort(function (a, b) {return a.target - b.target;});
