@@ -3,10 +3,9 @@ var odor = odor || {};
 
 (function () {
 
-  var padding = 30;
+  var padding = 45;
   var w = $(".target-graphs").width();
   var h = $(".target-graphs").height();
-  console.log(w)
   var targetGraph = d3.select('.target-graph').append('svg')
       .attr('class', 'chart')
       .attr('width', w)
@@ -19,8 +18,15 @@ var odor = odor || {};
                     .ticks(5);
   targetGraph.append('g')
       .attr('class', 'axis').call(yAxis);
+  targetGraph.append("text")
+    .attr("class", "y graph-label")
+    .attr("text-anchor", "end")
+    .attr("y", -padding)
+    .attr("x", -padding)
+    .attr("dy", ".75em")
+    .attr("transform", "rotate(-90)")
+    .text("oob prediction (q2)");
 
-    console.log('add render target');
   odor.render_target_graph = function () {
       var data = data_container.target_data;
       data.sort(function (a, b) {return a.target - b.target;});

@@ -1,12 +1,9 @@
 var odor = odor || {};
 
 (function () {
-    var padding = 30;
+    var padding = 45;
     var w = $(".predictions-graph").width();
     var h = $(".predictions-graph").height();
-    console.log(w)
-    console.log(h)
-    console.log('here');
     var chart = d3.select('.predictions-graph').append('svg')
         .attr('class', 'chart')
         .attr('width', w)
@@ -19,6 +16,15 @@ var odor = odor || {};
                       .ticks(5);
     chart.append('g')
         .attr('class', 'axis').call(yAxis);
+    chart.append("text")
+      .attr("class", "y graph-label")
+      .attr("text-anchor", "end")
+      .attr("y", -padding)
+      .attr("x", -padding)
+      .attr("dy", ".75em")
+      .attr("transform", "rotate(-90)")
+      .text("prediction (q2)");
+
 
     odor.render_graph = function () {
         var data = data_container.predictions.slice(0, data_container.count);

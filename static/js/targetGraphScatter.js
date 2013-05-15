@@ -1,11 +1,10 @@
 var odor = odor || {};
 
 (function () {
-    var padding = 20;
+    var padding = 25;
     var w = $(".target-graph-scatter").width();
     var h = $(".target-graph-scatter").height();
     var r = 3;
-    console.log('here');
     var chart = d3.select('.target-graph-scatter').append('svg')
         .attr('class', 'chart')
         .attr('width', w)
@@ -49,6 +48,20 @@ var odor = odor || {};
         var y = d3.scale.linear()
                   .domain([0, max_prop(data, "oob_prediction.oob_mean")])
                   .rangeRound([h - padding, padding + r * 2]);
+        chart.append("text")
+          .attr("class", "x graph-label")
+          .attr("text-anchor", "end")
+          .attr("x", w - padding)
+          .attr("y", h + padding - 10)
+          .text("target value (q2)");
+        chart.append("text")
+          .attr("class", "y graph-label")
+          .attr("text-anchor", "end")
+          .attr("y", -padding)
+          .attr("x", -padding -20)
+          .attr("dy", ".75em")
+          .attr("transform", "rotate(-90)")
+          .text("oob prediction (q2)");
 
         var circles = chart.selectAll('circle')
             .data(data);

@@ -63,7 +63,7 @@ tr.active {
     shape-rendering: crispEdges;
 }
 
-.axis text {
+text {
     font-family: sans-serif;
     font-size: 11px;
 }
