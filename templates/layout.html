@@ -9,6 +9,16 @@
     <script src={{url_for( "static", filename="js/bootstrap.js" )}}></script>
     <script src={{url_for( "static", filename="js/d3.v3.js" )}}></script>
     <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      
+      ga('create', 'UA-43030736-1', 'biomachinelearning.net');
+      ga('send', 'pageview');
+
+    </script>
+    <script>
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', 'UA-41043018-1']);
       _gaq.push(['_trackPageview']);
@@ -22,7 +32,8 @@
 
   <body>
     <h1>Predictions for receptor and method</h1>
-    <p>Please cite: <b><i>Gabler, Soelter, Hussain, Sachse and Schmuker</i> (2013)</b>: Physicochemical properties vs. vibrational descriptors for virtual screening of odorants.<br/> <i>Molecular Informatics, in press</i>.</p>
+    <p>Please cite: <br>
+Gabler S, Soelter J, Hussain T, Sachse S, Schmuker M (2013): Physicochemical properties vs. vibrational descriptors for virtual screening of odorants.<br/> <i>Molecular Informatics, in press</i>.</p>
     {% include 'helpmodal.html' %}
     <a href="#helpmodal" class="btn" data-toggle="modal" id='help'>
       <i class='icon-question-sign'></i> Help
