@@ -5,4 +5,8 @@ models/training_data/eva_100_training_data.json
 models/training_data/haddad_training_data.json
 models/training_data/readme.txt
 models/training_data/response_matrix.csv
-models/training_data/response_matrix.json
+models/training_data/response_matrix.json.bash_history
+.bash_history
+.gitconfig
+*~
+.viminfo
